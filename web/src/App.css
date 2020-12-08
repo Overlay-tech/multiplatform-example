@@ -1,0 +1,29 @@
+.main {
+  background-color: rgba(244,248,255,1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.emoji {
+  font-size: 100px;
+  margin-bottom: 10px;
+}
+.text {
+  color: rgba(32,63,84,1);
+  max-width: 230px;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+.button {
+  border: 2px solid rgba(32,63,84,1);
+  background-color: transparent;
+  transition: background-color 200ms;
+  border-radius: 3px;
+  padding: 10px 32px;
+  display: flex;
+  color: rgba(32,63,84,1);
+  cursor: pointer;
+  font-size: 18px;
+}

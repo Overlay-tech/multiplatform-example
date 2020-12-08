@@ -1,0 +1,7 @@
+{
+  "name": "flower-name",
+  "id": "918187475041739700",
+  "api": "1.0.0",
+  "main": "dist/main.js",
+  "ui": "dist/ui.html"
+}

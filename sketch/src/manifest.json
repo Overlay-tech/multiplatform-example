@@ -1,0 +1,24 @@
+{
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "commands": [
+    {
+      "name": "flower-name",
+      "identifier": "main",
+      "script": "./main.js",
+      "handlers": {
+        "run": "onRun",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      }
+    }
+  ],
+  "menu": {
+    "title": "flower-name",
+    "items": [
+      "main"
+    ],
+    "isRoot": true
+  }
+}
