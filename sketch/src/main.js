@@ -42,6 +42,12 @@ export default function () {
     },
   );
 
+  webContents.on('CHECK_DESIGN_TOOL', () => {
+    sendToWebview(
+      `sendDesignTool(${JSON.stringify('SKETCH')})`,
+    );
+  })
+
   browserWindow.loadURL(
     process.env.PLUGIN_ENDPOINT ? process.env.PLUGIN_ENDPOINT : 'http:localhost:3000',
   )
