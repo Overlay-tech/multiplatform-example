@@ -42,7 +42,9 @@ export default function () {
     },
   );
 
-  browserWindow.loadURL('http://localhost:3000')
+  browserWindow.loadURL(
+    process.env.PLUGIN_ENDPOINT ? process.env.PLUGIN_ENDPOINT : 'http:localhost:3000',
+  )
 }
 
 export function onShutdown() {

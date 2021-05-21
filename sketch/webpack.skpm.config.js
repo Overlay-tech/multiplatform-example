@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = function (config, entry) {
   config.node = entry.isPluginCommand ? false : {
     setImmediate: false
@@ -29,4 +31,12 @@ module.exports = function (config, entry) {
       },
     ]
   })
+
+  return {
+    plugins: [
+      new webpack.EnvironmentPlugin({
+        PLUGIN_ENDPOINT: 'http:localhost:3000',
+      }),
+    ],
+  };
 }

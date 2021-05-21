@@ -55,4 +55,45 @@ Now you can go in Figma Desktop app and click on `Manage plugins...` > `Create n
 
 You can use your plugin in Figma Desktop app 🎉
 
+## Deployment
+
+To deploy the plugin you need to deploy the three parts : 
+
+### Deploy the web part
+
+First deploy the React app, to do so, you have to build the app in production mode :
+
+```
+cd web && npm run build
+```
+
+Then to host the build folder on a server (AWS S3, Google Cloud storage, etc ...)
+
+### Deploy the sketch part
+
+First you need to build the plugin with the React app endpoint 
+
+```
+PLUGIN_ENDPOINT=https://my-endpoint.com && cd sketch && npm run build
+```
+
+Then zip the result 
+```
+tar -czvf <your-plugin-name>.tar.gz <your-plugin-name>.sketchplugin
+```
+
+Then you can give to your user this zip file to install you plugin. 
+
+### Deploy the figma part
+
+First you need to build the plugin with the React app endpoint
+
+```
+PLUGIN_ENDPOINT=https://my-endpoint.com && cd figma && npm run build
+```
+
+Then you can go in Figma Desktop app and click on `Manage plugins...` > `Create new plugin` > `Link existing plugin` and select the path to `figma/manifest.json`. 
+
+Finally, you can publish the plugin on the figma community `Manage plugins...` > `<your plugin name>` > `publish` `
+
 Made with ♥️ by **Overlay Team**
