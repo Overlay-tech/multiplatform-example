@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const localUrl = 'https://699c8be1bcb6.ngrok.io';
+const localUrl = 'https://b86c45f47ba8.ngrok.io';
 
 module.exports = (env, argv) => ({
   mode: argv.mode === 'production' ? 'production' : 'development',

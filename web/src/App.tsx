@@ -16,12 +16,46 @@ function App() {
   const [designTool, setDesignTool] = useState<DesignToolEnum>(DesignToolEnum.SKETCH)
 
   useEffect(() => {
+    window.parent.postMessage('CHECK_DESIGN_TOOL', '*');
+
+    const askFigmaForDesignTool = () =>
+      new Promise(resolve => {
+        const designToolSentByFigma = (event: any) => {
+          if (event.data.type === 'check-version-response') resolve({ designTool: event.data.data.designTool });
+        };
+
+        window.addEventListener('message', designToolSentByFigma, false);
+      });
+
+    const askSketchForDesignTool = () =>
+      new Promise(resolve => {
+        // @ts-ignore This function is call in the sketch side
+        window.sendDesignTool = (designTool: DesignToolEnum) => {
+          resolve({
+            designTool,
+          });
+        };
+      });
+
+    const askForDesignToolTimeout = () => new Promise(function(resolve, reject) {
+      setTimeout(() => reject(new Error('timeout')), 2000);
+    });
+
+    Promise.race([
+      askForDesignToolTimeout(),
+      askFigmaForDesignTool(),
+      askSketchForDesignTool()
+    ]).then((value: any) => {
+      setDesignTool(value.designTool);
+      }, () => {
+      console.log('error design tool unknown')
+    });
+
     // Figma Listener
     window.onmessage = async (event: any) => {
       if (event.data.type === 'select-layer') {
         setLayerName(event.data.data.layerName)
         setLayerId(event.data.data.layerId)
-        setDesignTool(DesignToolEnum.FIGMA);
       }
     };
 
@@ -29,7 +63,6 @@ function App() {
     window.selectLayer = (layerId: string, name: string) => {
       setLayerName(name)
       setLayerId(layerId)
-      setDesignTool(DesignToolEnum.SKETCH);
     };
   }, [])
 
